@@ -1,25 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:padding="24dp"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="16dp">
 
     <Button
         android:id="@+id/btnProduct1"
-        android:text="T-Shirt - $15"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:text="T-Shirt" />
 
     <Button
         android:id="@+id/btnProduct2"
-        android:text="Jacket - $45"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:text="Jacket"
+        android:layout_marginTop="12dp"/>
 
     <Button
         android:id="@+id/btnProduct3"
-        android:text="Jeans - $30"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:text="Jeans"
+        android:layout_marginTop="12dp"/>
+
 </LinearLayout>

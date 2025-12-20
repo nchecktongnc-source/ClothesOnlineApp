@@ -14,12 +14,7 @@ class CartActivity : AppCompatActivity() {
         binding = ActivityCartBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val items = CartManager.getCartItems()
-        val text = items.joinToString("\n") {
-            "${it.name} - $${it.price}"
-        }
-
-        binding.tvItems.text = text
-        binding.tvTotal.text = "Total: $${CartManager.getTotalPrice()}"
+        val total = CartManager.getTotalPrice()
+        binding.tvTotal.text = "Total: $$total"
     }
 }

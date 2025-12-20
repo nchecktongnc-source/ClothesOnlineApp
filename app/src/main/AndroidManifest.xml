@@ -1,26 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.clothesonlineapp">
 
     <application
         android:allowBackup="true"
-        android:label="Clothes Online App"
+        android:label="FLATON SHOP"
         android:icon="@mipmap/ic_launcher"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ClothesOnlineApp">
 
-        <activity android:name=".ui.cart.CartActivity"/>
-        <activity android:name=".ui.detail.DetailActivity"/>
-        <activity android:name=".ui.dashboard.DashboardActivity"/>
-
+        <!-- HOME / DASHBOARD (LAUNCHER) -->
         <activity
             android:name=".ui.home.HomeActivity"
             android:exported="true">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- OTHER SCREENS -->
+        <activity android:name=".ui.detail.DetailActivity" />
+        <activity android:name=".ui.cart.CartActivity" />
 
     </application>
 

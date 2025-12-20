@@ -19,12 +19,14 @@ class DetailActivity : AppCompatActivity() {
 
         val name = intent.getStringExtra("name") ?: ""
         val price = intent.getDoubleExtra("price", 0.0)
+        val image = intent.getIntExtra("image", 0)
 
         binding.tvName.text = name
         binding.tvPrice.text = "$$price"
+        binding.imgProduct.setImageResource(image)
 
         binding.btnAddToCart.setOnClickListener {
-            CartManager.addToCart(Product(0, name, price))
+            CartManager.addToCart(Product(0, name, price, image))
             startActivity(Intent(this, CartActivity::class.java))
         }
     }
