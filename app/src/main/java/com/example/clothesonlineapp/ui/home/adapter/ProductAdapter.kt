@@ -7,28 +7,30 @@ import com.example.clothesonlineapp.databinding.ItemProductBinding
 import com.example.clothesonlineapp.model.Product
 
 class ProductAdapter(
-    private val products: List<Product>
-) : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
+    private val items: List<Product>,
+    private val onClick: (Product) -> Unit
+) : RecyclerView.Adapter<ProductAdapter.ViewHolder>() {
 
-    inner class ProductViewHolder(val binding: ItemProductBinding) :
-        RecyclerView.ViewHolder(binding.root)
+    inner class ViewHolder(val binding: ItemProductBinding)
+        : RecyclerView.ViewHolder(binding.root)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemProductBinding.inflate(
-            LayoutInflater.from(parent.context),
-            parent,
-            false
+            LayoutInflater.from(parent.context), parent, false
         )
-        return ProductViewHolder(binding)
+        return ViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
-        val product = products[position]
-
-        holder.binding.txtName.text = product.name
-        holder.binding.txtPrice.text = "$${product.price}"
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val product = items[position]
+        holder.binding.tvName.text = product.name
+        holder.binding.tvPrice.text = "$${product.price}"
         holder.binding.imgProduct.setImageResource(product.imageRes)
+
+        holder.itemView.setOnClickListener {
+            onClick(product)
+        }
     }
 
-    override fun getItemCount(): Int = products.size
+    override fun getItemCount() = items.size
 }

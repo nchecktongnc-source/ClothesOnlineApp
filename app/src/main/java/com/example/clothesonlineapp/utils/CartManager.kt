@@ -4,15 +4,26 @@ import com.example.clothesonlineapp.model.Product
 
 object CartManager {
 
-    private val cartItems = mutableListOf<Product>()
+    private val _items = mutableListOf<Product>()
+
+    val items: MutableList<Product>
+        get() = _items
 
     fun addToCart(product: Product) {
-        cartItems.add(product)
+        _items.add(product)
     }
 
-    fun getCartItems(): List<Product> = cartItems
+    fun removeItem(position: Int) {
+        _items.removeAt(position)
+    }
 
-    fun getTotalPrice(): Double {
-        return cartItems.sumOf { it.price }
+    fun getAll(): List<Product> = _items
+
+    fun clear() {
+        _items.clear()
+    }
+
+    fun totalPrice(): Double {
+        return _items.sumOf { it.price }
     }
 }

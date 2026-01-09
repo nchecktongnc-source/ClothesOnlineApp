@@ -3,7 +3,6 @@ package com.example.clothesonlineapp.ui.cart
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.clothesonlineapp.databinding.ActivityCartBinding
-import com.example.clothesonlineapp.utils.CartManager
 
 class CartActivity : AppCompatActivity() {
 
@@ -14,7 +13,8 @@ class CartActivity : AppCompatActivity() {
         binding = ActivityCartBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val total = CartManager.getTotalPrice()
-        binding.tvTotal.text = "Total: $$total"
+        binding.btnBackHome.setOnClickListener {
+            finish()
+        }
     }
 }

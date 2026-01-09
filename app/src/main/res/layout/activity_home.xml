@@ -5,50 +5,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- TOP BAR -->
+    <!-- SINGLE TOOLBAR ONLY -->
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:title="Clothes Store"
+        app:menu="@menu/menu_home"
         android:background="?attr/colorPrimary"
-        android:title="FLATON STORE"
-        android:titleTextColor="@android:color/white" />
+        android:titleTextColor="@android:color/white"/>
 
-    <ScrollView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="?attr/actionBarSize">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <!-- BANNER -->
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/banner"/>
-
-            <!-- SECTION TITLE -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Shirts for Sale"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:padding="16dp"/>
-
-            <!-- PRODUCT GRID -->
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="8dp"/>
-
-        </LinearLayout>
-
-    </ScrollView>
+        android:layout_marginTop="?attr/actionBarSize"
+        android:padding="12dp"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
