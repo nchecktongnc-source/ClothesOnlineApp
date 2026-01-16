@@ -1,20 +1,22 @@
 package com.example.clothesonlineapp.ui.cart
 
 import android.os.Bundle
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.example.clothesonlineapp.databinding.ActivityCartBinding
+import androidx.recyclerview.widget.RecyclerView
+import com.example.clothesonlineapp.R
+import com.example.clothesonlineapp.utils.CartManager
 
 class CartActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityCartBinding
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityCartBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(R.layout.activity_cart)
 
-        binding.btnBackHome.setOnClickListener {
-            finish()
-        }
+        val recycler = findViewById<RecyclerView>(R.id.recyclerCart)
+        val total = findViewById<TextView>(R.id.tvTotal)
+
+        recycler.adapter = CartAdapter(CartManager.getItems())
+        total.text = "Total: $${CartManager.getTotalPrice()}"
     }
 }

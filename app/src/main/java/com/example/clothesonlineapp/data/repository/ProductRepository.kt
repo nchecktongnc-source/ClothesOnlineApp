@@ -1,11 +1,16 @@
 package com.example.clothesonlineapp.data.repository
 
-import com.example.clothesonlineapp.data.source.DummyData
-import com.example.clothesonlineapp.model.Product
+import com.example.clothesonlineapp.R
+import com.example.clothesonlineapp.data.model.Product
 
-class ProductRepository {
+object ProductRepository {
 
     fun getProducts(): List<Product> {
-        return DummyData.getProducts()
+        return listOf(
+            Product("T-Shirt", 19.99, R.drawable.ic_launcher_foreground),
+            Product("Jacket", 49.99, R.drawable.ic_launcher_foreground),
+            Product("Shoes", 79.99, R.drawable.ic_launcher_foreground),
+            Product("Cap", 14.99, R.drawable.ic_launcher_foreground)
+        )
     }
 }

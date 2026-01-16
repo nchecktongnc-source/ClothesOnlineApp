@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application
         android:allowBackup="true"
+        android:label="ClothesOnlineApp"
         android:icon="@mipmap/ic_launcher"
-        android:label="Clothes Online App"
+        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Material3.DayNight.NoActionBar">
 
-        <!-- HOME (LAUNCHER) -->
+        <!-- HOME / LAUNCHER -->
         <activity
             android:name=".ui.home.HomeActivity"
             android:exported="true">
@@ -31,6 +33,11 @@
         <!-- CHECKOUT -->
         <activity
             android:name=".ui.checkout.CheckoutActivity"
+            android:exported="false" />
+
+        <!-- DASHBOARD (if you still use it) -->
+        <activity
+            android:name=".ui.dashboard.DashboardActivity"
             android:exported="false" />
 
     </application>

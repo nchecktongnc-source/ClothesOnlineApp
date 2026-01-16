@@ -1,0 +1,19 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:background="#FFFFFF">
+
+    <TextView
+        android:text="Your cart is empty"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
+
+    <Button
+        android:text="Continue shopping"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="#6EA8D6"
+        android:textColor="@android:color/white"/>
+</LinearLayout>

@@ -1,29 +1,22 @@
 package com.example.clothesonlineapp.utils
 
-import com.example.clothesonlineapp.model.Product
+import com.example.clothesonlineapp.data.model.Product
 
 object CartManager {
 
-    private val _items = mutableListOf<Product>()
+    private val cartItems = mutableListOf<Product>()
 
-    val items: MutableList<Product>
-        get() = _items
-
-    fun addToCart(product: Product) {
-        _items.add(product)
+    fun add(product: Product) {
+        cartItems.add(product)
     }
 
-    fun removeItem(position: Int) {
-        _items.removeAt(position)
+    fun getItems(): List<Product> = cartItems
+
+    fun clearCart() {
+        cartItems.clear()
     }
 
-    fun getAll(): List<Product> = _items
-
-    fun clear() {
-        _items.clear()
-    }
-
-    fun totalPrice(): Double {
-        return _items.sumOf { it.price }
+    fun getTotalPrice(): Double {
+        return cartItems.sumOf { it.price }
     }
 }

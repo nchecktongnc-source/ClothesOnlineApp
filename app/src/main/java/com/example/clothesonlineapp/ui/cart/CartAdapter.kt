@@ -1,37 +1,33 @@
 package com.example.clothesonlineapp.ui.cart
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.clothesonlineapp.databinding.ItemCartBinding
-import com.example.clothesonlineapp.model.Product
-import com.example.clothesonlineapp.utils.CartManager
+import com.example.clothesonlineapp.R
+import com.example.clothesonlineapp.data.model.Product   // ✅ FIX
 
 class CartAdapter(
-    private val items: MutableList<Product>
-) : RecyclerView.Adapter<CartAdapter.ViewHolder>() {
+    private val items: List<Product>
+) : RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
 
-    inner class ViewHolder(val binding: ItemCartBinding)
-        : RecyclerView.ViewHolder(binding.root)
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = ItemCartBinding.inflate(
-            LayoutInflater.from(parent.context), parent, false
-        )
-        return ViewHolder(binding)
+    inner class CartViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val tvName: TextView = view.findViewById(R.id.tvName)
+        val tvPrice: TextView = view.findViewById(R.id.tvPrice)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartViewHolder {
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.item_cart, parent, false)
+        return CartViewHolder(view)
+    }
+
+    override fun onBindViewHolder(holder: CartViewHolder, position: Int) {
         val product = items[position]
-        holder.binding.txtName.text = product.name
-        holder.binding.txtPrice.text = "$${product.price}"
-
-        holder.binding.btnRemove.setOnClickListener {
-            CartManager.removeItem(position)
-            notifyItemRemoved(position)
-            notifyItemRangeChanged(position, items.size)
-        }
+        holder.tvName.text = product.name
+        holder.tvPrice.text = "$${product.price}"
     }
 
-    override fun getItemCount() = items.size
+    override fun getItemCount(): Int = items.size
 }

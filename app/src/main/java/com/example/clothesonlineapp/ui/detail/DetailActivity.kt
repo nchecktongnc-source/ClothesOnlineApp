@@ -1,10 +1,10 @@
 package com.example.clothesonlineapp.ui.detail
 
+import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.example.clothesonlineapp.data.model.Product
 import com.example.clothesonlineapp.databinding.ActivityDetailBinding
-import com.example.clothesonlineapp.model.Product
-import com.example.clothesonlineapp.utils.CartManager
 
 class DetailActivity : AppCompatActivity() {
 
@@ -15,18 +15,20 @@ class DetailActivity : AppCompatActivity() {
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val name = intent.getStringExtra("name") ?: ""
-        val price = intent.getDoubleExtra("price", 0.0)
-        val imageRes = intent.getIntExtra("image", 0)
-
-        binding.txtName.text = name
-        binding.txtPrice.text = "$$price"
-        binding.imgProduct.setImageResource(imageRes)
-
-        binding.btnAddToCart.setOnClickListener {
-            CartManager.addToCart(
-                Product(name, price, imageRes)
-            )
+        val product = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            intent.getSerializableExtra("product", Product::class.java)
+        } else {
+            @Suppress("DEPRECATION")
+            intent.getSerializableExtra("product") as? Product
         }
+
+        if (product == null) {
+            finish()
+            return
+        }
+
+        binding.imgProduct.setImageResource(product.imageRes)
+        binding.txtName.text = product.name
+        binding.txtPrice.text = "$${product.price}"
     }
 }
