@@ -1,6 +1,7 @@
 package com.example.clothesonlineapp.ui.checkout
 
 import android.os.Bundle
+import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -13,11 +14,15 @@ class CheckoutActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_checkout)
 
-        val tvTotal = findViewById<TextView>(R.id.tvTotal)
+        val txtTotal = findViewById<TextView>(R.id.txtTotal)
+        val btnPay = findViewById<Button>(R.id.btnPay)
 
-        tvTotal.text = "$${CartManager.getTotalPrice()}"
+        txtTotal.text = "Total: $${CartManager.getTotalPrice()}"
 
-        CartManager.clearCart()
-        Toast.makeText(this, "Order placed!", Toast.LENGTH_SHORT).show()
+        btnPay.setOnClickListener {
+            Toast.makeText(this, "Payment Successful", Toast.LENGTH_SHORT).show()
+            CartManager.clearCart()
+            finish()
+        }
     }
 }

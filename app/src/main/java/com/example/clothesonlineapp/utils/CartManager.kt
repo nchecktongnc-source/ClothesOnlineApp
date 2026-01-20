@@ -10,13 +10,15 @@ object CartManager {
         cartItems.add(product)
     }
 
-    fun getItems(): List<Product> = cartItems
-
-    fun clearCart() {
-        cartItems.clear()
+    fun getItems(): List<Product> {
+        return cartItems
     }
 
     fun getTotalPrice(): Double {
         return cartItems.sumOf { it.price }
+    }
+
+    fun clearCart() {
+        cartItems.clear()
     }
 }

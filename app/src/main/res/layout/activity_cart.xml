@@ -1,15 +1,8 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:background="#FFFFFF">
-
-    <TextView
-        android:text="Cart • 1 item"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:padding="16dp"/>
+    android:padding="16dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerCart"
@@ -17,23 +10,19 @@
         android:layout_height="0dp"
         android:layout_weight="1"/>
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/txtTotal"
+        android:text="Total: $0.00"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginTop="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/btnCheckout"
+        android:text="Checkout"
+        android:layout_marginTop="12dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/tvSubtotal"
-            android:text="Subtotal  $38.00"
-            android:textSize="16sp"/>
-
-        <Button
-            android:text="CHECK OUT"
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:layout_marginTop="12dp"
-            android:backgroundTint="#6EA8D6"
-            android:textColor="@android:color/white"/>
-    </LinearLayout>
+        android:layout_height="wrap_content"/>
 </LinearLayout>

@@ -7,10 +7,9 @@ object ProductRepository {
 
     fun getProducts(): List<Product> {
         return listOf(
-            Product("T-Shirt", 19.99, R.drawable.ic_launcher_foreground),
-            Product("Jacket", 49.99, R.drawable.ic_launcher_foreground),
-            Product("Shoes", 79.99, R.drawable.ic_launcher_foreground),
-            Product("Cap", 14.99, R.drawable.ic_launcher_foreground)
+            Product("Jacket", 49.99, R.drawable.jacket),
+            Product("Jeans", 39.99, R.drawable.jeans),
+            Product("T-Shirt", 19.99, R.drawable.tshirt)
         )
     }
 }

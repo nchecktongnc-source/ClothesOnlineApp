@@ -4,28 +4,28 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.clothesonlineapp.*
 import com.example.clothesonlineapp.data.repository.ProductRepository
-import com.example.clothesonlineapp.databinding.ActivityHomeBinding
-import com.example.clothesonlineapp.ui.detail.DetailActivity
+import com.example.clothesonlineapp.ui.cart.CartActivity
 import com.example.clothesonlineapp.ui.home.adapter.ProductAdapter
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class HomeActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityHomeBinding
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityHomeBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(R.layout.activity_home)
 
-        val products = ProductRepository.getProducts()
+        val recycler = findViewById<androidx.recyclerview.widget.RecyclerView>(R.id.recyclerProducts)
+        recycler.layoutManager = GridLayoutManager(this, 2)
+        recycler.adapter = ProductAdapter(ProductRepository.getProducts())
 
-        binding.recyclerProducts.layoutManager = GridLayoutManager(this, 2)
-        binding.recyclerProducts.adapter =
-            ProductAdapter(products) { product ->
-                val intent = Intent(this, DetailActivity::class.java)
-                intent.putExtra("product", product)
-                startActivity(intent)
+        findViewById<BottomNavigationView>(R.id.bottomNav)
+            .setOnItemSelectedListener {
+                if (it.itemId == R.id.nav_cart) {
+                    startActivity(Intent(this, CartActivity::class.java))
+                }
+                true
             }
     }
 }
