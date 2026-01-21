@@ -1,12 +1,14 @@
 package com.example.clothesonlineapp.ui.home.adapter
 
 import android.content.Intent
+import android.widget.Toast
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.clothesonlineapp.databinding.ItemProductBinding
 import com.example.clothesonlineapp.model.Product
 import com.example.clothesonlineapp.ui.detail.DetailActivity
+import com.example.clothesonlineapp.utils.CartManager
 
 class ProductAdapter(
     private val items: List<Product>
@@ -31,10 +33,21 @@ class ProductAdapter(
         holder.binding.txtPrice.text = "$${product.price}"
         holder.binding.imgProduct.setImageResource(product.image)
 
-        holder.itemView.setOnClickListener {
+        // 👉 CARD CLICK → Detail page
+        holder.binding.root.setOnClickListener {
             val intent = Intent(holder.itemView.context, DetailActivity::class.java)
-            intent.putExtra("product", product) // ✅ CORRECT
+            intent.putExtra("product", product)
             holder.itemView.context.startActivity(intent)
+        }
+
+        // 👉 ADD TO CART BUTTON CLICK
+        holder.binding.btnAddToCart.setOnClickListener {
+            CartManager.add(product)
+            Toast.makeText(
+                holder.itemView.context,
+                "${product.name} added to cart",
+                Toast.LENGTH_SHORT
+            ).show()
         }
     }
 

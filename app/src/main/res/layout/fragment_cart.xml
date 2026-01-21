@@ -1,7 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+    android:id="@+id/cartRoot"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- EMPTY STATE -->
+    <LinearLayout
+        android:id="@+id/emptyLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:visibility="gone">
+
+        <TextView
+            android:text="Your cart is empty"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
 
     <!-- CART LIST -->
     <androidx.recyclerview.widget.RecyclerView
@@ -10,43 +30,22 @@
         android:layout_height="0dp"
         android:layout_weight="1"/>
 
-    <!-- EMPTY STATE -->
-    <LinearLayout
-        android:id="@+id/emptyLayout"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:visibility="gone"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
-
-        <TextView
-            android:text="Your cart is empty"
-            android:textSize="18sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <Button
-            android:id="@+id/btnStartShopping"
-            android:text="Start Shopping"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    </LinearLayout>
-
     <!-- TOTAL -->
     <TextView
         android:id="@+id/txtTotal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="Total: $0.00"
+        android:textSize="22sp"
         android:textStyle="bold"
-        android:textSize="18sp"
-        android:padding="16dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_marginTop="12dp"/>
 
     <!-- CHECKOUT -->
     <Button
         android:id="@+id/btnCheckout"
-        android:text="Checkout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:text="Checkout"
+        android:layout_marginTop="12dp"/>
+
 </LinearLayout>

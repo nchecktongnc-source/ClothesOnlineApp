@@ -9,39 +9,47 @@ import com.example.clothesonlineapp.utils.CartManager
 
 class CartAdapter(
     private val items: MutableList<CartItem>,
-    private val onUpdate: () -> Unit
+    private val onChange: () -> Unit
 ) : RecyclerView.Adapter<CartAdapter.ViewHolder>() {
 
-    inner class ViewHolder(val binding: ItemCartBinding)
-        : RecyclerView.ViewHolder(binding.root)
+    inner class ViewHolder(val binding: ItemCartBinding) :
+        RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemCartBinding.inflate(
-            LayoutInflater.from(parent.context), parent, false
+            LayoutInflater.from(parent.context),
+            parent,
+            false
         )
         return ViewHolder(binding)
     }
 
-    override fun getItemCount() = items.size
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = items[position]
 
+        holder.binding.imgProduct.setImageResource(item.product.image)
         holder.binding.txtName.text = item.product.name
         holder.binding.txtPrice.text = "$${item.product.price}"
         holder.binding.txtQty.text = item.qty.toString()
-        holder.binding.imgProduct.setImageResource(item.product.image)
 
         holder.binding.btnPlus.setOnClickListener {
             CartManager.increase(item)
             notifyItemChanged(position)
-            onUpdate()
+            onChange() // 🔥 update total
         }
 
         holder.binding.btnMinus.setOnClickListener {
             CartManager.decrease(item)
             notifyDataSetChanged()
-            onUpdate()
+            onChange() // 🔥 update total
+        }
+
+        holder.binding.btnDelete.setOnClickListener {
+            items.remove(item)
+            notifyDataSetChanged()
+            onChange() // 🔥 update total
         }
     }
+
+    override fun getItemCount() = items.size
 }

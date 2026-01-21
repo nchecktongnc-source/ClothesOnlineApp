@@ -15,31 +15,38 @@ class DetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
 
-        val product = intent.getParcelableExtra<Product>("product")
-            ?: run {
-                Toast.makeText(this, "Product not found", Toast.LENGTH_SHORT).show()
-                finish()
-                return
-            }
+        // ✅ SAFE product receive (prevents crash)
+        val product = intent.getSerializableExtra("product") as? Product
+        if (product == null) {
+            Toast.makeText(this, "Product not found", Toast.LENGTH_SHORT).show()
+            finish()
+            return
+        }
 
         val img = findViewById<ImageView>(R.id.imgProduct)
         val name = findViewById<TextView>(R.id.txtName)
         val price = findViewById<TextView>(R.id.txtPrice)
+
         val qtyText = findViewById<TextView>(R.id.txtQty)
         val btnPlus = findViewById<Button>(R.id.btnPlus)
         val btnMinus = findViewById<Button>(R.id.btnMinus)
         val btnAdd = findViewById<Button>(R.id.btnAddToCart)
+
         val sizeGroup = findViewById<RadioGroup>(R.id.sizeGroup)
 
+        // Bind data
         img.setImageResource(product.image)
         name.text = product.name
         price.text = "$${product.price}"
+        qtyText.text = qty.toString()
 
+        // ➕ Increase
         btnPlus.setOnClickListener {
             qty++
             qtyText.text = qty.toString()
         }
 
+        // ➖ Decrease (min = 1)
         btnMinus.setOnClickListener {
             if (qty > 1) {
                 qty--
@@ -47,9 +54,12 @@ class DetailActivity : AppCompatActivity() {
             }
         }
 
+        // 🛒 Add to Cart
         btnAdd.setOnClickListener {
+
+            // Optional: require size selection
             if (sizeGroup.checkedRadioButtonId == -1) {
-                Toast.makeText(this, "Please select a size", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Please select size", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
@@ -57,7 +67,7 @@ class DetailActivity : AppCompatActivity() {
                 CartManager.add(product)
             }
 
-            Toast.makeText(this, "Added to cart", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Added $qty item(s) to cart", Toast.LENGTH_SHORT).show()
             finish()
         }
     }
