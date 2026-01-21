@@ -5,14 +5,14 @@ import com.example.clothesonlineapp.model.Product
 
 object CartManager {
 
-    private val cartItems = mutableListOf<CartItem>()
+    private val items = mutableListOf<CartItem>()
 
     fun add(product: Product) {
-        val existing = cartItems.find { it.product.name == product.name }
-        if (existing != null) {
-            existing.qty++
+        val found = items.find { it.product.name == product.name }
+        if (found != null) {
+            found.qty++
         } else {
-            cartItems.add(CartItem(product, 1))
+            items.add(CartItem(product, 1))
         }
     }
 
@@ -21,23 +21,16 @@ object CartManager {
     }
 
     fun decrease(item: CartItem) {
-        if (item.qty > 1) {
-            item.qty--
-        } else {
-            cartItems.remove(item)
-        }
+        if (item.qty > 1) item.qty--
+        else items.remove(item)
     }
 
-    fun remove(item: CartItem) {
-        cartItems.remove(item)
-    }
+    fun getItems(): MutableList<CartItem> = items
+
+    fun totalPrice(): Double =
+        items.sumOf { it.product.price * it.qty }
 
     fun clear() {
-        cartItems.clear()
+        items.clear()
     }
-
-    fun getItems(): List<CartItem> = cartItems
-
-    fun getTotal(): Double =
-        cartItems.sumOf { it.product.price * it.qty }
 }

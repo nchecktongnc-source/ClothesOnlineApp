@@ -1,41 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <ImageView
         android:id="@+id/imgProduct"
         android:layout_width="match_parent"
-        android:layout_height="220dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/ic_placeholder" />
+        android:layout_height="240dp"
+        android:scaleType="centerCrop"/>
 
     <TextView
         android:id="@+id/txtName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Product Name"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:layout_marginTop="12dp"/>
+        android:layout_marginTop="12dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
     <TextView
         android:id="@+id/txtPrice"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="$0.00"
-        android:textSize="18sp"
-        android:textColor="#666666"
-        android:layout_marginTop="4dp"/>
+        android:textSize="16sp"
+        android:layout_marginTop="4dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
+    <!-- 🔥 THIS BUTTON MUST EXIST -->
     <Button
-        android:id="@+id/btnAddCart"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:id="@+id/btnAddToCart"
         android:text="Add to Cart"
-        android:layout_marginTop="24dp"/>
+        android:layout_marginTop="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
 </LinearLayout>

@@ -31,9 +31,20 @@
 
         <TextView
             android:id="@+id/txtPrice"
+            android:layout_marginTop="4dp"
             android:textColor="#666666"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+
+        <!-- ✅ ADD TO CART BUTTON -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnAddToCart"
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add to Cart"
+            app:cornerRadius="8dp" />
+
     </LinearLayout>
 
 </com.google.android.material.card.MaterialCardView>

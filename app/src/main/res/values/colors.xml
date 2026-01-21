@@ -13,4 +13,9 @@
     <color name="surface">@color/md_theme_light_surface</color>
     <color name="onSurface">@color/md_theme_light_onSurface</color>
 
+    <!-- Existing colors stay -->
+
+    <color name="green">#4CAF50</color>
+    <color name="gray">#9E9E9E</color>
+
 </resources>

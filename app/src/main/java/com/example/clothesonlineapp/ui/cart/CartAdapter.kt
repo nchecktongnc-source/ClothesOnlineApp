@@ -12,43 +12,40 @@ class CartAdapter(
     private val onUpdate: () -> Unit
 ) : RecyclerView.Adapter<CartAdapter.ViewHolder>() {
 
-    inner class ViewHolder(val binding: ItemCartBinding) :
-        RecyclerView.ViewHolder(binding.root)
+    inner class ViewHolder(val binding: ItemCartBinding)
+        : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(
-            ItemCartBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
-            )
+        val binding = ItemCartBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
         )
+        return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = items[position]
 
-        holder.binding.txtName.text = item.product.name
-        holder.binding.txtPrice.text = "$${item.product.price}"
-        holder.binding.txtQty.text = item.qty.toString()
-        holder.binding.imgProduct.setImageResource(item.product.image)
+        with(holder.binding) {
+            txtName.text = item.product.name
+            txtPrice.text = "$${item.product.price}"
+            txtQty.text = item.qty.toString()
+            imgProduct.setImageResource(item.product.image)
 
-        holder.binding.btnPlus.setOnClickListener {
-            CartManager.increase(item)
-            refresh()
+            btnPlus.setOnClickListener {
+                CartManager.increase(item)
+                notifyItemChanged(position)
+                onUpdate()
+            }
+
+            btnMinus.setOnClickListener {
+                CartManager.decrease(item)
+                notifyDataSetChanged()
+                onUpdate()
+            }
+
         }
-
-        holder.binding.btnMinus.setOnClickListener {
-            CartManager.decrease(item)
-            refresh()
-        }
-    }
-
-    private fun refresh() {
-        items.clear()
-        items.addAll(CartManager.getItems())
-        notifyDataSetChanged()
-        onUpdate()
     }
 
     override fun getItemCount() = items.size
