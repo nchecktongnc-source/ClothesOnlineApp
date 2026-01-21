@@ -22,13 +22,11 @@ class HomeActivity : AppCompatActivity() {
 
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)
 
-        bottomNav.selectedItemId = R.id.menu_home
-
         bottomNav.setOnItemSelectedListener {
             when (it.itemId) {
-                R.id.menu_home -> true
+                R.id.nav_home -> true // already here
 
-                R.id.menu_cart -> {
+                R.id.nav_cart -> {
                     startActivity(Intent(this, CartActivity::class.java))
                     true
                 }

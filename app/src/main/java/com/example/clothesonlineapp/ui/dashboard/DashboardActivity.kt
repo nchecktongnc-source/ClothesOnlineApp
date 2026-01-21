@@ -12,23 +12,24 @@ class DashboardActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_dashboard)
+        setContentView(R.layout.activity_home) // reuse home layout safely
 
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)
 
         bottomNav.setOnItemSelectedListener {
             when (it.itemId) {
-                R.id.menu_home -> {
+                R.id.nav_home -> {
                     startActivity(Intent(this, HomeActivity::class.java))
+                    true
                 }
-                R.id.menu_cart -> {
-                    startActivity(Intent(this, CartActivity::class.java))
-                }
-            }
-            true
-        }
 
-        // Default screen
-        startActivity(Intent(this, HomeActivity::class.java))
+                R.id.nav_cart -> {
+                    startActivity(Intent(this, CartActivity::class.java))
+                    true
+                }
+
+                else -> false
+            }
+        }
     }
 }
