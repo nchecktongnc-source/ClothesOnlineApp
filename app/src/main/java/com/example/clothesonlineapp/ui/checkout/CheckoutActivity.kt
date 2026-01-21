@@ -15,11 +15,9 @@ class CheckoutActivity : AppCompatActivity() {
         binding = ActivityCheckoutBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.txtTotal.text =
-            "Total: $${CartManager.getTotalPrice()}"
-
         binding.btnPay.setOnClickListener {
             CartManager.clear()
+
             startActivity(
                 Intent(this, PaymentSuccessActivity::class.java)
             )

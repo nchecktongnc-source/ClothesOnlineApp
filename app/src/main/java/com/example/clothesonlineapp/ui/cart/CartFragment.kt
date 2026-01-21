@@ -1,52 +1,44 @@
 package com.example.clothesonlineapp.ui.cart
 
+import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.clothesonlineapp.R
 import com.example.clothesonlineapp.databinding.FragmentCartBinding
+import com.example.clothesonlineapp.ui.checkout.CheckoutActivity
 import com.example.clothesonlineapp.utils.CartManager
 
-class CartFragment : Fragment() {
+class CartFragment : Fragment(R.layout.fragment_cart) {
 
-    private var _binding: FragmentCartBinding? = null
-    private val binding get() = _binding!!
+    private lateinit var binding: FragmentCartBinding
+    private lateinit var adapter: CartAdapter
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentCartBinding.inflate(inflater, container, false)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding = FragmentCartBinding.bind(view)
+
+        adapter = CartAdapter(
+            CartManager.getItems().toMutableList()
+        ) {
+            updateTotal()
+        }
 
         binding.recyclerCart.layoutManager = LinearLayoutManager(requireContext())
-
-        val adapter = CartAdapter(CartManager.getItems()) {
-            updateUI()
-        }
-
         binding.recyclerCart.adapter = adapter
 
-        updateUI()
+        updateTotal()
 
         binding.btnCheckout.setOnClickListener {
-            // open CheckoutActivity
+            startActivity(
+                Intent(requireContext(), CheckoutActivity::class.java)
+            )
         }
-
-        return binding.root
     }
 
-    private fun updateUI() {
-        val empty = CartManager.getItems().isEmpty()
-        binding.txtEmpty.visibility = if (empty) View.VISIBLE else View.GONE
-        binding.recyclerCart.visibility = if (empty) View.GONE else View.VISIBLE
-        binding.txtTotal.text = "Total: $${CartManager.getTotalPrice()}"
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    private fun updateTotal() {
+        binding.txtTotal.text = "Total: $${CartManager.getTotal()}"
     }
 }

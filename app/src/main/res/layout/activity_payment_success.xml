@@ -1,22 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:padding="24dp">
 
     <TextView
-        android:text="✅ Payment Successful!"
-        android:textSize="26sp"
+        android:text="Payment Successful 🎉"
+        android:textSize="22sp"
         android:textStyle="bold"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_marginBottom="24dp"/>
 
-    <TextView
-        android:text="Thank you for your order"
-        android:textSize="16sp"
-        android:layout_marginTop="8dp"
+    <Button
+        android:id="@+id/btnBackHome"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:text="Back to Home"/>
 </LinearLayout>

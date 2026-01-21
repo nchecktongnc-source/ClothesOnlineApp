@@ -9,34 +9,36 @@ import com.example.clothesonlineapp.model.Product
 import com.example.clothesonlineapp.ui.detail.DetailActivity
 
 class ProductAdapter(
-    private val products: List<Product>
-) : RecyclerView.Adapter<ProductAdapter.VH>() {
+    private val items: List<Product>
+) : RecyclerView.Adapter<ProductAdapter.ViewHolder>() {
 
-    inner class VH(val binding: ItemProductBinding)
-        : RecyclerView.ViewHolder(binding.root)
+    inner class ViewHolder(val binding: ItemProductBinding) :
+        RecyclerView.ViewHolder(binding.root)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemProductBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
         )
-        return VH(binding)
+        return ViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: VH, position: Int) {
-        val product = products[position]
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val product = items[position]
 
-        holder.binding.imgProduct.setImageResource(product.imageRes)
         holder.binding.txtName.text = product.name
         holder.binding.txtPrice.text = "$${product.price}"
+        holder.binding.imgProduct.setImageResource(product.image)
 
-        holder.binding.root.setOnClickListener {
-            val intent = Intent(it.context, DetailActivity::class.java)
-            intent.putExtra("product", product)
-            it.context.startActivity(intent)
+        holder.itemView.setOnClickListener {
+            val intent = Intent(holder.itemView.context, DetailActivity::class.java)
+            intent.putExtra("name", product.name)
+            intent.putExtra("price", product.price)
+            intent.putExtra("image", product.image)
+            holder.itemView.context.startActivity(intent)
         }
     }
 
-    override fun getItemCount() = products.size
+    override fun getItemCount() = items.size
 }

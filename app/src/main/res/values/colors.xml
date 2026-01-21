@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="blue_main">#6FA8DC</color>
-    <color name="orange_main">#F2994A</color>
 
-    <color name="black">#000000</color>
-    <color name="white">#FFFFFF</color>
-    <color name="text_gray">#777777</color>
+    <!-- Material 3 core colors -->
+    <color name="md_theme_light_primary">#6750A4</color>
+    <color name="md_theme_light_onPrimary">#FFFFFF</color>
 
-    <!-- Material fallback (fix build errors) -->
-    <color name="purple_200">#BB86FC</color>
-    <color name="purple_500">#6200EE</color>
-    <color name="purple_700">#3700B3</color>
-    <color name="teal_200">#03DAC5</color>
-    <color name="teal_700">#018786</color>
+    <color name="md_theme_light_background">#FFFFFF</color>
+    <color name="md_theme_light_surface">#FFFFFF</color>
+    <color name="md_theme_light_onSurface">#1C1B1F</color>
+
+    <!-- Aliases for layouts (IMPORTANT) -->
+    <color name="surface">@color/md_theme_light_surface</color>
+    <color name="onSurface">@color/md_theme_light_onSurface</color>
+
 </resources>

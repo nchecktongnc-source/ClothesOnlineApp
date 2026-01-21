@@ -1,7 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.ClothesOnlineApp" parent="Theme.Material3.DayNight.NoActionBar">
-        <item name="android:windowBackground">@android:color/white</item>
+    <style name="Theme.ClothesApp" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/md_theme_light_primary</item>
+        <item name="colorOnPrimary">@color/md_theme_light_onPrimary</item>
+        <item name="android:colorBackground">@color/md_theme_light_background</item>
     </style>
 
 </resources>
