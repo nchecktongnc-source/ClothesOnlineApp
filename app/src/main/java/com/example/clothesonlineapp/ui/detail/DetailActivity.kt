@@ -1,27 +1,29 @@
 package com.example.clothesonlineapp.ui.detail
 
 import android.os.Bundle
-import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import com.example.clothesonlineapp.R
-import com.example.clothesonlineapp.data.model.Product
+import com.example.clothesonlineapp.databinding.ActivityDetailBinding
+import com.example.clothesonlineapp.model.Product
 import com.example.clothesonlineapp.utils.CartManager
 
 class DetailActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityDetailBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_detail)
+        binding = ActivityDetailBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val product = intent.getSerializableExtra("product") as Product
+        val product = intent.getParcelableExtra<Product>("product")!!
 
-        findViewById<ImageView>(R.id.imgDetail).setImageResource(product.imageRes)
-        findViewById<TextView>(R.id.txtName).text = product.name
-        findViewById<TextView>(R.id.txtPrice).text = "$${product.price}"
+        binding.imgProduct.setImageResource(product.imageRes)
+        binding.txtName.text = product.name
+        binding.txtPrice.text = "$${product.price}"
 
-        findViewById<Button>(R.id.btnAdd).setOnClickListener {
+        binding.btnAddCart.setOnClickListener {
             CartManager.add(product)
-            Toast.makeText(this, "Added to cart", Toast.LENGTH_SHORT).show()
+            finish()
         }
     }
 }

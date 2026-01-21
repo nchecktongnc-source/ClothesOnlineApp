@@ -1,39 +1,42 @@
 package com.example.clothesonlineapp.ui.home.adapter
 
 import android.content.Intent
-import android.view.*
-import android.widget.*
+import android.view.LayoutInflater
+import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.clothesonlineapp.*
-import com.example.clothesonlineapp.data.model.Product
+import com.example.clothesonlineapp.databinding.ItemProductBinding
+import com.example.clothesonlineapp.model.Product
 import com.example.clothesonlineapp.ui.detail.DetailActivity
 
-class ProductAdapter(private val items: List<Product>) :
-    RecyclerView.Adapter<ProductAdapter.VH>() {
+class ProductAdapter(
+    private val products: List<Product>
+) : RecyclerView.Adapter<ProductAdapter.VH>() {
 
-    inner class VH(view: View) : RecyclerView.ViewHolder(view) {
-        val img: ImageView = view.findViewById(R.id.imgProduct)
-        val name: TextView = view.findViewById(R.id.txtName)
-        val price: TextView = view.findViewById(R.id.txtPrice)
+    inner class VH(val binding: ItemProductBinding)
+        : RecyclerView.ViewHolder(binding.root)
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
+        val binding = ItemProductBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
+        )
+        return VH(binding)
     }
 
-    override fun onCreateViewHolder(p: ViewGroup, v: Int): VH {
-        return VH(LayoutInflater.from(p.context)
-            .inflate(R.layout.item_product, p, false))
-    }
+    override fun onBindViewHolder(holder: VH, position: Int) {
+        val product = products[position]
 
-    override fun onBindViewHolder(h: VH, i: Int) {
-        val p = items[i]
-        h.img.setImageResource(p.imageRes)
-        h.name.text = p.name
-        h.price.text = "$${p.price}"
+        holder.binding.imgProduct.setImageResource(product.imageRes)
+        holder.binding.txtName.text = product.name
+        holder.binding.txtPrice.text = "$${product.price}"
 
-        h.itemView.setOnClickListener {
+        holder.binding.root.setOnClickListener {
             val intent = Intent(it.context, DetailActivity::class.java)
-            intent.putExtra("product", p)
+            intent.putExtra("product", product)
             it.context.startActivity(intent)
         }
     }
 
-    override fun getItemCount() = items.size
+    override fun getItemCount() = products.size
 }

@@ -1,24 +1,42 @@
 package com.example.clothesonlineapp.utils
 
-import com.example.clothesonlineapp.data.model.Product
+import com.example.clothesonlineapp.model.CartItem
+import com.example.clothesonlineapp.model.Product
 
 object CartManager {
 
-    private val cartItems = mutableListOf<Product>()
+    private val items = mutableListOf<CartItem>()
 
     fun add(product: Product) {
-        cartItems.add(product)
+        val existing = items.find { it.product.name == product.name }
+        if (existing != null) {
+            existing.qty++
+        } else {
+            items.add(CartItem(product))
+        }
     }
 
-    fun getItems(): List<Product> {
-        return cartItems
+    fun increase(item: CartItem) {
+        item.qty++
     }
 
-    fun getTotalPrice(): Double {
-        return cartItems.sumOf { it.price }
+    fun decrease(item: CartItem) {
+        if (item.qty > 1) {
+            item.qty--
+        } else {
+            items.remove(item)
+        }
     }
 
-    fun clearCart() {
-        cartItems.clear()
+    fun clear() {
+        items.clear()
     }
+
+    fun getItems(): MutableList<CartItem> = items
+
+    fun getTotalPrice(): Double =
+        items.sumOf { it.product.price * it.qty }
+
+    fun getCount(): Int =
+        items.sumOf { it.qty }
 }

@@ -1,9 +1,11 @@
-package com.example.clothesonlineapp.data.model
+package com.example.clothesonlineapp.model
 
-import java.io.Serializable
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class Product(
     val name: String,
     val price: Double,
-    val imageRes: Int
-) : Serializable
+    val imageRes: Int   // ✅ REQUIRED
+) : Parcelable

@@ -1,23 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:padding="24dp"
+    android:gravity="center"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/txtTotal"
-        android:text="Total: $0.00"
-        android:textSize="22sp"
+        android:text="✅ Payment Successful!"
+        android:textSize="26sp"
         android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
-    <Button
-        android:id="@+id/btnPay"
-        android:text="Pay Now 💳"
-        android:layout_marginTop="24dp"
-        android:layout_width="match_parent"
+    <TextView
+        android:text="Thank you for your order"
+        android:textSize="16sp"
+        android:layout_marginTop="8dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 </LinearLayout>

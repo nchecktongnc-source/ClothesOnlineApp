@@ -1,29 +1,25 @@
 package com.example.clothesonlineapp.ui.home
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.clothesonlineapp.R
 import com.example.clothesonlineapp.data.repository.ProductRepository
+import com.example.clothesonlineapp.databinding.FragmentHomeBinding
 import com.example.clothesonlineapp.ui.home.adapter.ProductAdapter
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(R.layout.fragment_home) {
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        val view = inflater.inflate(R.layout.activity_home, container, false)
+    private lateinit var binding: FragmentHomeBinding
 
-        val recycler = view.findViewById<RecyclerView>(R.id.recyclerProducts)
-        recycler.layoutManager = GridLayoutManager(requireContext(), 2)
-        recycler.adapter = ProductAdapter(ProductRepository.getProducts())
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        return view
+        binding = FragmentHomeBinding.bind(view)
+
+        binding.recyclerHome.layoutManager = LinearLayoutManager(requireContext())
+        binding.recyclerHome.adapter =
+            ProductAdapter(ProductRepository.getProducts())
     }
 }
