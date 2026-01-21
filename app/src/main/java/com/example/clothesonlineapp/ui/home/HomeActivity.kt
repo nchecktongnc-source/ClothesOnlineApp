@@ -4,7 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.clothesonlineapp.*
+import com.example.clothesonlineapp.R
 import com.example.clothesonlineapp.data.repository.ProductRepository
 import com.example.clothesonlineapp.ui.cart.CartActivity
 import com.example.clothesonlineapp.ui.home.adapter.ProductAdapter
@@ -20,12 +20,21 @@ class HomeActivity : AppCompatActivity() {
         recycler.layoutManager = GridLayoutManager(this, 2)
         recycler.adapter = ProductAdapter(ProductRepository.getProducts())
 
-        findViewById<BottomNavigationView>(R.id.bottomNav)
-            .setOnItemSelectedListener {
-                if (it.itemId == R.id.nav_cart) {
+        val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)
+
+        bottomNav.selectedItemId = R.id.menu_home
+
+        bottomNav.setOnItemSelectedListener {
+            when (it.itemId) {
+                R.id.menu_home -> true
+
+                R.id.menu_cart -> {
                     startActivity(Intent(this, CartActivity::class.java))
+                    true
                 }
-                true
+
+                else -> false
             }
+        }
     }
 }

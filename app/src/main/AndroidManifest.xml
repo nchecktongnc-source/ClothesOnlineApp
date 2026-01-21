@@ -8,6 +8,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Material3.DayNight.NoActionBar">
 
+        <!-- DASHBOARD (LAUNCHER) -->
+        <activity
+            android:name=".ui.dashboard.DashboardActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+        <!-- SCREENS -->
         <activity
             android:name=".ui.detail.DetailActivity"
             android:exported="false" />
@@ -18,12 +29,11 @@
 
         <activity
             android:name=".ui.home.HomeActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-        </activity>
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.checkout.CheckoutActivity"
+            android:exported="false" />
 
     </application>
 </manifest>
