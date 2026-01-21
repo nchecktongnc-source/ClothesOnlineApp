@@ -1,5 +1,6 @@
 package com.example.clothesonlineapp.ui.dashboard
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.clothesonlineapp.R
@@ -16,7 +17,9 @@ class DashboardActivity : AppCompatActivity() {
 
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)
 
-        // Default screen
+        // 🔥 FORCE HOME TAB
+        bottomNav.selectedItemId = R.id.nav_home
+
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragmentContainer, HomeFragment())
             .commit()
@@ -31,15 +34,27 @@ class DashboardActivity : AppCompatActivity() {
                         .commit()
                     true
                 }
-
                 R.id.nav_cart -> {
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.fragmentContainer, CartFragment())
                         .commit()
                     true
                 }
-
                 else -> false
+            }
+        }
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        intent?.let {
+            if (it.getBooleanExtra("go_home", false)) {
+                val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)
+                bottomNav.selectedItemId = R.id.nav_home
+
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.fragmentContainer, HomeFragment())
+                    .commit()
             }
         }
     }
@@ -53,11 +68,7 @@ class DashboardActivity : AppCompatActivity() {
         val badge = bottomNav.getOrCreateBadge(R.id.nav_cart)
         val count = CartManager.getItems().sumOf { it.qty }
 
-        if (count > 0) {
-            badge.isVisible = true
-            badge.number = count
-        } else {
-            badge.isVisible = false
-        }
+        badge.isVisible = count > 0
+        badge.number = count
     }
 }

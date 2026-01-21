@@ -17,36 +17,31 @@ class CartAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemCartBinding.inflate(
-            LayoutInflater.from(parent.context),
-            parent,
-            false
+            LayoutInflater.from(parent.context), parent, false
         )
         return ViewHolder(binding)
     }
 
+    override fun getItemCount() = items.size
+
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = items[position]
 
-        with(holder.binding) {
-            txtName.text = item.product.name
-            txtPrice.text = "$${item.product.price}"
-            txtQty.text = item.qty.toString()
-            imgProduct.setImageResource(item.product.image)
+        holder.binding.txtName.text = item.product.name
+        holder.binding.txtPrice.text = "$${item.product.price}"
+        holder.binding.txtQty.text = item.qty.toString()
+        holder.binding.imgProduct.setImageResource(item.product.image)
 
-            btnPlus.setOnClickListener {
-                CartManager.increase(item)
-                notifyItemChanged(position)
-                onUpdate()
-            }
+        holder.binding.btnPlus.setOnClickListener {
+            CartManager.increase(item)
+            notifyItemChanged(position)
+            onUpdate()
+        }
 
-            btnMinus.setOnClickListener {
-                CartManager.decrease(item)
-                notifyDataSetChanged()
-                onUpdate()
-            }
-
+        holder.binding.btnMinus.setOnClickListener {
+            CartManager.decrease(item)
+            notifyDataSetChanged()
+            onUpdate()
         }
     }
-
-    override fun getItemCount() = items.size
 }

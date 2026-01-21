@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.clothesonlineapp.databinding.ItemProductBinding
 import com.example.clothesonlineapp.model.Product
 import com.example.clothesonlineapp.ui.detail.DetailActivity
-import com.example.clothesonlineapp.utils.CartManager
 
 class ProductAdapter(
     private val items: List<Product>
@@ -32,18 +31,10 @@ class ProductAdapter(
         holder.binding.txtPrice.text = "$${product.price}"
         holder.binding.imgProduct.setImageResource(product.image)
 
-        // 👉 Open detail page
         holder.itemView.setOnClickListener {
             val intent = Intent(holder.itemView.context, DetailActivity::class.java)
-            intent.putExtra("name", product.name)
-            intent.putExtra("price", product.price)
-            intent.putExtra("image", product.image)
+            intent.putExtra("product", product) // ✅ CORRECT
             holder.itemView.context.startActivity(intent)
-        }
-
-        // 👉 ADD TO CART (THIS WAS MISSING)
-        holder.binding.btnAddToCart.setOnClickListener {
-            CartManager.add(product)
         }
     }
 

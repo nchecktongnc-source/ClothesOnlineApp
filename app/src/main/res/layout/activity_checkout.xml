@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:padding="24dp"
     android:orientation="vertical"
+    android:gravity="center_horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -11,8 +12,35 @@
         android:text="Total: $0.00"
         android:textSize="22sp"
         android:textStyle="bold"
+        android:layout_marginBottom="8dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
+
+    <!-- ⏱ Countdown -->
+    <TextView
+        android:id="@+id/txtTimer"
+        android:text="Time left: 02:00"
+        android:textSize="16sp"
+        android:textColor="#D32F2F"
+        android:layout_marginBottom="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <!-- QR -->
+    <ImageView
+        android:id="@+id/imgQr"
+        android:src="@drawable/qr_payment"
+        android:layout_width="220dp"
+        android:layout_height="220dp"
+        android:layout_marginBottom="24dp"/>
+
+    <!-- ✅ Success Check (Hidden) -->
+    <ImageView
+        android:id="@+id/imgSuccess"
+        android:src="@drawable/ic_check"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:visibility="gone"/>
 
     <Button
         android:id="@+id/btnPay"

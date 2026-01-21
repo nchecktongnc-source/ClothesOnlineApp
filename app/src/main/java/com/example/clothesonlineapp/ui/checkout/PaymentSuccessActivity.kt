@@ -1,8 +1,9 @@
 package com.example.clothesonlineapp.ui.checkout
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.animation.OvershootInterpolator
-import android.widget.Button
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.clothesonlineapp.R
@@ -15,7 +16,6 @@ class PaymentSuccessActivity : AppCompatActivity() {
         setContentView(R.layout.activity_payment_success)
 
         val icon = findViewById<ImageView>(R.id.imgSuccess)
-        val btn = findViewById<Button>(R.id.btnBackHome)
 
         CartManager.clear()
 
@@ -28,8 +28,8 @@ class PaymentSuccessActivity : AppCompatActivity() {
             .setInterpolator(OvershootInterpolator())
             .start()
 
-        btn.setOnClickListener {
-            finishAffinity()
-        }
+        Handler(Looper.getMainLooper()).postDelayed({
+            finishAffinity() // 🔥 back to home
+        }, 1200)
     }
 }
