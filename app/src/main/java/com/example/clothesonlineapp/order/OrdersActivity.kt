@@ -1,11 +1,11 @@
 package com.example.clothesonlineapp.order
 
 import android.os.Bundle
+import android.util.Log
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.clothesonlineapp.R
-import com.google.firebase.database.*
+import com.google.firebase.database.FirebaseDatabase
 
 class OrdersActivity : AppCompatActivity() {
 
@@ -15,34 +15,36 @@ class OrdersActivity : AppCompatActivity() {
         )
     }
 
-    private val orders = mutableListOf<Order>()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_orders)
 
-        val recycler = findViewById<RecyclerView>(R.id.recyclerOrders)
-        recycler.layoutManager = LinearLayoutManager(this)
-        val adapter = OrdersAdapter(orders)
-        recycler.adapter = adapter
+        val txtOrders = findViewById<TextView>(R.id.txtOrders)
 
         database.getReference("orders")
-            .addValueEventListener(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    orders.clear()
-
-                    for (child in snapshot.children) {
-                        val order = child.getValue(Order::class.java)
-                        if (order != null) {
-                            orders.add(order)
-                        }
-                    }
-
-                    orders.reverse() // newest first
-                    adapter.notifyDataSetChanged()
+            .get()
+            .addOnSuccessListener { snapshot ->
+                if (!snapshot.exists()) {
+                    txtOrders.text = "No orders yet"
+                    return@addOnSuccessListener
                 }
 
-                override fun onCancelled(error: DatabaseError) {}
-            })
+                val builder = StringBuilder()
+
+                snapshot.children.forEach { order ->
+                    val total = order.child("total").getValue(Double::class.java)
+                    val time = order.child("timestamp").getValue(Long::class.java)
+
+                    builder.append("🧾 Order\n")
+                    builder.append("Total: $total\n")
+                    builder.append("Time: $time\n\n")
+                }
+
+                txtOrders.text = builder.toString()
+            }
+            .addOnFailureListener {
+                Log.e("ORDERS", "Failed to load orders", it)
+                txtOrders.text = "Failed to load orders"
+            }
     }
 }
