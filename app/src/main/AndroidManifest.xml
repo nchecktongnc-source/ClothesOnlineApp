@@ -1,5 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <!-- ✅ REQUIRED FOR FIREBASE / INTERNET -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:allowBackup="true"
         android:label="Clothes App"
@@ -18,22 +21,26 @@
             </intent-filter>
         </activity>
 
-        <!-- SCREENS -->
+        <!-- DETAIL -->
         <activity
             android:name=".ui.detail.DetailActivity"
             android:exported="false" />
 
-        <activity
-            android:name=".ui.cart.CartActivity"
-            android:exported="false" />
-
-        <activity
-            android:name=".ui.home.HomeActivity"
-            android:exported="false" />
-
+        <!-- CHECKOUT -->
         <activity
             android:name=".ui.checkout.CheckoutActivity"
             android:exported="false" />
+
+        <!-- PAYMENT SUCCESS -->
+        <activity
+            android:name=".ui.checkout.PaymentSuccessActivity"
+            android:exported="false" />
+
+        <!-- ORDERS LIST -->
+        <activity
+            android:name=".order.OrdersActivity"
+            android:exported="false" />
+
 
     </application>
 </manifest>

@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.clothesonlineapp.R
+import com.example.clothesonlineapp.order.OrdersActivity
 import com.example.clothesonlineapp.ui.cart.CartFragment
 import com.example.clothesonlineapp.ui.home.HomeFragment
 import com.example.clothesonlineapp.utils.CartManager
@@ -17,46 +18,44 @@ class DashboardActivity : AppCompatActivity() {
 
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)
 
-        // 🔥 FORCE HOME TAB
+        // 🔥 DEFAULT HOME
         bottomNav.selectedItemId = R.id.nav_home
-
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.fragmentContainer, HomeFragment())
-            .commit()
+        openHome()
 
         updateCartBadge(bottomNav)
 
         bottomNav.setOnItemSelectedListener { item ->
             when (item.itemId) {
+
                 R.id.nav_home -> {
-                    supportFragmentManager.beginTransaction()
-                        .replace(R.id.fragmentContainer, HomeFragment())
-                        .commit()
+                    openHome()
                     true
                 }
+
                 R.id.nav_cart -> {
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.fragmentContainer, CartFragment())
                         .commit()
                     true
                 }
+
+                // 🧾 ORDERS → OPEN ACTIVITY
+                R.id.nav_orders -> {
+                    startActivity(
+                        Intent(this, OrdersActivity::class.java)
+                    )
+                    false
+                }
+
                 else -> false
             }
         }
     }
 
-    override fun onNewIntent(intent: Intent?) {
-        super.onNewIntent(intent)
-        intent?.let {
-            if (it.getBooleanExtra("go_home", false)) {
-                val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)
-                bottomNav.selectedItemId = R.id.nav_home
-
-                supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragmentContainer, HomeFragment())
-                    .commit()
-            }
-        }
+    private fun openHome() {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragmentContainer, HomeFragment())
+            .commit()
     }
 
     override fun onResume() {

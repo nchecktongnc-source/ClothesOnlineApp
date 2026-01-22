@@ -32,22 +32,25 @@ class CartAdapter(
         holder.binding.txtPrice.text = "$${item.product.price}"
         holder.binding.txtQty.text = item.qty.toString()
 
+        // ➕ Increase
         holder.binding.btnPlus.setOnClickListener {
             CartManager.increase(item)
             notifyItemChanged(position)
-            onChange() // 🔥 update total
+            onChange()
         }
 
+        // ➖ Decrease
         holder.binding.btnMinus.setOnClickListener {
             CartManager.decrease(item)
             notifyDataSetChanged()
-            onChange() // 🔥 update total
+            onChange()
         }
 
+        // 🗑 Remove
         holder.binding.btnDelete.setOnClickListener {
-            items.remove(item)
+            CartManager.remove(item)
             notifyDataSetChanged()
-            onChange() // 🔥 update total
+            onChange()
         }
     }
 

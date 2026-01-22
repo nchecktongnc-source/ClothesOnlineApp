@@ -2,6 +2,9 @@
 <manifest
     xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <!-- 🔥 REQUIRED FOR FIREBASE -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:allowBackup="true"
         android:label="ClothesOnlineApp"
@@ -35,7 +38,7 @@
             android:name=".ui.checkout.CheckoutActivity"
             android:exported="false" />
 
-        <!-- DASHBOARD (if you still use it) -->
+        <!-- DASHBOARD -->
         <activity
             android:name=".ui.dashboard.DashboardActivity"
             android:exported="false" />

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "257451311968",
+    "project_id": "clothesonlineapp",
+    "storage_bucket": "clothesonlineapp.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:257451311968:android:2edf1e356ec3c41d071405",
+        "android_client_info": {
+          "package_name": "com.example.clothesonlineapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDzoeeovugR-K3Gk0FrCfcDnzHtEBuIZBY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -21,8 +21,16 @@ object CartManager {
     }
 
     fun decrease(item: CartItem) {
-        if (item.qty > 1) item.qty--
-        else items.remove(item)
+        if (item.qty > 1) {
+            item.qty--
+        } else {
+            items.remove(item)
+        }
+    }
+
+    // ✅ ADD THIS
+    fun remove(item: CartItem) {
+        items.remove(item)
     }
 
     fun getItems(): MutableList<CartItem> = items

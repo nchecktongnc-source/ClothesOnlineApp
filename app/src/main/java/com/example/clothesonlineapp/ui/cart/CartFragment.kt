@@ -1,54 +1,56 @@
 package com.example.clothesonlineapp.ui.cart
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.clothesonlineapp.R
+import com.example.clothesonlineapp.ui.checkout.CheckoutActivity
 import com.example.clothesonlineapp.utils.CartManager
 
 class CartFragment : Fragment(R.layout.fragment_cart) {
 
+    private lateinit var recycler: RecyclerView
+    private lateinit var emptyLayout: View
     private lateinit var txtTotal: TextView
+    private lateinit var btnCheckout: Button
+    private lateinit var adapter: CartAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val recycler = view.findViewById<RecyclerView>(R.id.recyclerCart)
-        val emptyLayout = view.findViewById<View>(R.id.emptyLayout)
-        val btnCheckout = view.findViewById<Button>(R.id.btnCheckout)
+        recycler = view.findViewById(R.id.recyclerCart)
+        emptyLayout = view.findViewById(R.id.emptyLayout)
         txtTotal = view.findViewById(R.id.txtTotal)
+        btnCheckout = view.findViewById(R.id.btnCheckout)
 
         recycler.layoutManager = LinearLayoutManager(requireContext())
-
-        val adapter = CartAdapter(
-            CartManager.getItems()
-        ) {
-            updateUI(recycler, emptyLayout)
-            updateTotal() // ✅ IMPORTANT
-        }
-
+        adapter = CartAdapter(CartManager.getItems()) { updateUI() }
         recycler.adapter = adapter
 
-        updateUI(recycler, emptyLayout)
-        updateTotal() // ✅ FIRST LOAD
-    }
+        btnCheckout.setOnClickListener {
+            if (CartManager.getItems().isEmpty()) {
+                Toast.makeText(requireContext(), "Cart is empty", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
 
-    private fun updateUI(recycler: RecyclerView, empty: View) {
-        if (CartManager.getItems().isEmpty()) {
-            recycler.visibility = View.GONE
-            empty.visibility = View.VISIBLE
-        } else {
-            recycler.visibility = View.VISIBLE
-            empty.visibility = View.GONE
+            // ✅ GO TO PAYMENT SCREEN
+            startActivity(Intent(requireContext(), CheckoutActivity::class.java))
         }
+
+        updateUI()
     }
 
-    private fun updateTotal() {
-        val total = CartManager.totalPrice()
-        txtTotal.text = "Total: $${"%.2f".format(total)}"
+    private fun updateUI() {
+        val empty = CartManager.getItems().isEmpty()
+        emptyLayout.visibility = if (empty) View.VISIBLE else View.GONE
+        recycler.visibility = if (empty) View.GONE else View.VISIBLE
+        txtTotal.text = "Total: $%.2f".format(CartManager.totalPrice())
+        adapter.notifyDataSetChanged()
     }
 }

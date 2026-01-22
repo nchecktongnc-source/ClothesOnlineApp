@@ -1,3 +1,12 @@
 <resources>
+    <!-- App -->
     <string name="app_name">Clothes Online App</string>
+
+    <!-- Payment Success -->
+    <string name="payment_successful">Payment Successful</string>
+    <string name="thank_you">Thank you for your purchase</string>
+    <string name="receipt_close">This receipt will close automatically</string>
+
+    <!-- Total -->
+    <string name="total_format">Total: $%.2f</string>
 </resources>

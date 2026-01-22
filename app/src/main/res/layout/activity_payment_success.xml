@@ -1,20 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:gravity="center"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="24dp">
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="24dp"
+    android:background="@android:color/white">
 
+    <!-- ✅ TICK ICON -->
     <ImageView
         android:id="@+id/imgSuccess"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
         android:src="@drawable/ic_check_circle"
-        android:tint="@color/green"/>
+        android:tint="@android:color/holo_green_dark"
+        android:contentDescription="Success"
+        android:layout_marginBottom="20dp"
+        android:scaleX="0"
+        android:scaleY="0"/>
 
+    <!-- TITLE -->
     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="Payment Successful"
         android:textSize="22sp"
         android:textStyle="bold"
+        android:layout_marginBottom="8dp"/>
+    <TextView
+        android:id="@+id/txtCountdown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Returning in 3"
+        android:textSize="14sp"
+        android:layout_marginBottom="12dp"/>
+
+    <!-- MESSAGE -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Thank you for your purchase"
+        android:textSize="16sp"
+        android:layout_marginBottom="12dp"/>
+
+    <!-- AUTO CLOSE INFO -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="This receipt will close automatically"
+        android:textSize="14sp"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- TOTAL -->
+    <TextView
+        android:id="@+id/txtTotal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Total: $0.00"
+        android:textSize="20sp"
+        android:textStyle="bold"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerReceipt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"/>
 </LinearLayout>
